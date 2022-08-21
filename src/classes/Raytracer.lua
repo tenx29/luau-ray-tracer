@@ -60,7 +60,7 @@ end
 -- Postprocess the image
 function Raytracer:PostProcess(...)
     for _, PostProcessingShader in self.PostProcessingShaders do
-        self.Buffers = PostProcessingShader:Process(self, ...)
+        self.Buffers = PostProcessingShader:Process(self, ...) or self.Buffers
     end
     return self.Buffers
 end
