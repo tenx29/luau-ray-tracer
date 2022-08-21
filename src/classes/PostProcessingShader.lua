@@ -1,7 +1,7 @@
-local Raytracer = require(script.Parent.Raytracer) :: any
+local RayTracer = require(script.Parent.RayTracer) :: any
 
 export type PostProcessingShader = {
-    Function: (Raytracer: Raytracer, any...) -> {
+    Function: (RayTracer: RayTracer, any...) -> {
         Color: Color3,
         Depth: number,
         Normal: Color3,
@@ -10,7 +10,7 @@ export type PostProcessingShader = {
     GetAdjacentPixels: (Pixel: Vector2, Radius: number) -> {
         [number]: Vector2,
     },
-    Process: (Raytracer: Raytracer, any...) -> {
+    Process: (RayTracer: RayTracer, any...) -> {
         Color: Color3,
         Depth: number,
         Normal: Color3,
@@ -20,7 +20,7 @@ export type PostProcessingShader = {
 local PostProcessingShader = {}
 PostProcessingShader.__index = PostProcessingShader
 
-function PostProcessingShader.new(Function: (Raytracer: Raytracer, any...) -> {Color: Color3, Depth: number, Normal: Color3}, Attributes: {})
+function PostProcessingShader.new(Function: (RayTracer: RayTracer, any...) -> {Color: Color3, Depth: number, Normal: Color3}, Attributes: {})
     local self = setmetatable({}, PostProcessingShader)
     self.Function = Function
     self.Attributes = Attributes
@@ -44,8 +44,8 @@ function PostProcessingShader:GetAdjacentPixels(Pixel: Vector2, Resolution: Vect
     return Pixels
 end
 
-function PostProcessingShader:Process(Raytracer: Raytracer, ...)
-    return self.Function(Raytracer, ...)
+function PostProcessingShader:Process(RayTracer: RayTracer, ...)
+    return self.Function(RayTracer, ...)
 end
 
 return PostProcessingShader
