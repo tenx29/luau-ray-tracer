@@ -1,7 +1,5 @@
 local TracedRay = require(script.Parent.TracedRay)
 
-local Shader = require(script.Parent.Shader)
-
 local RayTracer = {}
 RayTracer.__index = RayTracer
 
@@ -11,10 +9,10 @@ RayTracer.__index = RayTracer
 -- @param Shaders: The shaders to use for the raytracer
 -- @param PostProcessingShaders: The post-processing shaders to use for the raytracer. These are applied after the shaders in order based on their index.
 -- @param RaycastParams: The raycast parameters to use for the raytracer
-function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number, Shaders: {Shader}, PostProcessingShaders: {PostProcessingShader}, RaycastParams: RaycastParams)
+function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number?, Shaders: {Shader}?, PostProcessingShaders: {PostProcessingShader}?, RaycastParams: RaycastParams?)
     local self = setmetatable({}, RayTracer)
     self.Camera = Camera
-    self.MaxBounces = MaxBounces
+    self.MaxBounces = MaxBounces or 10
     self.Shaders = Shaders or {}
     self.PostProcessingShaders = PostProcessingShaders or {}
     self.RaycastParams = RaycastParams
