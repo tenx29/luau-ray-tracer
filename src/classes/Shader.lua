@@ -59,6 +59,7 @@ end
 
 -- Process the vertex shader
 function Shader:Process(Ray: TracedRay, Hit: RaycastResult, ...)
+    if not self.Function then return end
     return self.Function(Ray, Hit, ...)
 end
 
