@@ -25,12 +25,12 @@ function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number?, Shaders: {
 end
 
 -- Visualise the normal buffer
-function RayTracer:VisualiseNormalBuffer(normal: Vector3)
+function RayTracer:VisualiseNormalBuffer(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
 -- Render the entire frame
-function RayTracer:Render()
+function RayTracer:Render(): {{Color3}}
     self.Buffers.Color = {}
     self.Buffers.Depth = {}
     self.Buffers.Normal = {}
@@ -56,7 +56,7 @@ function RayTracer:Render()
 end
 
 -- Postprocess the image
-function RayTracer:PostProcess(...)
+function RayTracer:PostProcess(...): {}
     for _, PostProcessingShader in self.PostProcessingShaders do
         self.Buffers = PostProcessingShader:Process(self, ...) or self.Buffers
     end
