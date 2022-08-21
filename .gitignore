@@ -1,0 +1,21 @@
+# Rojo files
+/src/init.server.lua
+/default.project.json
+/aftman.toml
+
+# Test shader files
+/src/shaders/*
+/src/postprocessing/*
+
+# Selene config
+/selene.toml
+
+# Project place file
+/Ray Tracing.rbxlx
+
+# Roblox Studio build
+/build.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
