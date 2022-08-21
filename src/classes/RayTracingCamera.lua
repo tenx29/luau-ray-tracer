@@ -29,7 +29,7 @@ end
 -- Top left pixel is (0, 0), bottom right pixel is (resolution.X - 1, resolution.Y - 1).
 -- @param pixel [T:Vector2] The pixel to get the ray for.
 -- @return [T:Vector3] The unit vector pointing in the direction of the pixel's ray.
-function RayTracingCamera:GetPixelDirection(pixel: Vector2)
+function RayTracingCamera:GetPixelDirection(pixel: Vector2): Vector3
     assert(pixel.X >= 0 and pixel.X <= self.Resolution.X, "Pixel X value out of bounds.")
     assert(pixel.Y >= 0 and pixel.Y <= self.Resolution.Y, "Pixel Y value out of bounds.")
 
@@ -50,7 +50,7 @@ end
 -- Get the initial raycast information for a pixel.
 -- @param pixel [T:Vector2] The pixel to get the ray for.
 -- @return [T:Ray] The pixel's ray.
-function RayTracingCamera:GetInitialRay(pixel: Vector2)
+function RayTracingCamera:GetInitialRay(pixel: Vector2): {Origin: Vector3, Direction: Vector3}
     local pixelVector = self:GetRay(pixel)
     local pixelPosition = self.CFrame.Position + pixelVector * self.NearPlane
     return {
