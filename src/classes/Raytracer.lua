@@ -2,8 +2,8 @@ local TracedRay = require(script.Parent.TracedRay)
 
 local Shader = require(script.Parent.Shader)
 
-local Raytracer = {}
-Raytracer.__index = Raytracer
+local RayTracer = {}
+RayTracer.__index = RayTracer
 
 -- Create a new raytracer
 -- @param Camera: The camera to use for the raytracer
@@ -11,8 +11,8 @@ Raytracer.__index = Raytracer
 -- @param Shaders: The shaders to use for the raytracer
 -- @param PostProcessingShaders: The post-processing shaders to use for the raytracer. These are applied after the shaders in order based on their index.
 -- @param RaycastParams: The raycast parameters to use for the raytracer
-function Raytracer.new(Camera: RayTracingCamera, MaxBounces: number, Shaders: {Shader}, PostProcessingShaders: {PostProcessingShader}, RaycastParams: RaycastParams)
-    local self = setmetatable({}, Raytracer)
+function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number, Shaders: {Shader}, PostProcessingShaders: {PostProcessingShader}, RaycastParams: RaycastParams)
+    local self = setmetatable({}, RayTracer)
     self.Camera = Camera
     self.MaxBounces = MaxBounces
     self.Shaders = Shaders or {}
@@ -27,12 +27,12 @@ function Raytracer.new(Camera: RayTracingCamera, MaxBounces: number, Shaders: {S
 end
 
 -- Visualise the normal buffer
-function Raytracer:VisualiseNormalBuffer(normal: Vector3)
+function RayTracer:VisualiseNormalBuffer(normal: Vector3)
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
 -- Render the entire frame
-function Raytracer:Render()
+function RayTracer:Render()
     self.Buffers.Color = {}
     self.Buffers.Depth = {}
     self.Buffers.Normal = {}
@@ -58,7 +58,7 @@ function Raytracer:Render()
 end
 
 -- Postprocess the image
-function Raytracer:PostProcess(...)
+function RayTracer:PostProcess(...)
     for _, PostProcessingShader in self.PostProcessingShaders do
         self.Buffers = PostProcessingShader:Process(self, ...) or self.Buffers
     end
@@ -69,18 +69,18 @@ end
 -- @param X: The x coordinate of the pixel
 -- @param Y: The y coordinate of the pixel
 -- @param Color: The color to set the pixel to
-function Raytracer:SetPixel(x, y, Color: Color3)
+function RayTracer:SetPixel(x, y, Color: Color3)
     self.Buffers.Color[x][y] = Color
 end
 
 -- Get a single pixel from the color buffer
 -- @param X: The x coordinate of the pixel to get
 -- @param Y: The y coordinate of the pixel to get
-function Raytracer:GetPixel(x, y): Color3
+function RayTracer:GetPixel(x, y): Color3
     if not self.Buffers[x] then
         return nil
     end
     return self.Buffers.Color[x][y]
 end
 
-return Raytracer
+return RayTracer
