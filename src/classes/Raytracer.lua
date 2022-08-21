@@ -32,7 +32,7 @@ function RayTracer:ClearBuffers()
 end
 
 -- Visualise the normal buffer
-function RayTracer:VisualiseNormalBuffer(normal: Vector3): Color3
+function RayTracer:VisualizeNormalBuffer(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
