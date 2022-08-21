@@ -32,7 +32,7 @@ function RayTracer:ClearBuffers()
 end
 
 -- Visualise the normal buffer
-function RayTracer:VisualizeNormalBuffer(normal: Vector3): Color3
+function RayTracer:VisualizeNormal(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
@@ -54,7 +54,7 @@ function RayTracer:Render(): {{Color3}}
 
             self.Buffers.Color[x][y] = color
             self.Buffers.Depth[x][y] = Ray.InitialCollision.Distance
-            self.Buffers.Normal[x][y] = self:VisualiseNormalBuffer(Ray.InitialCollision.Normal)
+            self.Buffers.Normal[x][y] = self:VisualizeNormal(Ray.InitialCollision.Normal)
         end
     end
     return self.Buffers.Color
