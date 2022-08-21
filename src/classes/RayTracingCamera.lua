@@ -1,5 +1,5 @@
 -- Resolution is the dimensions of the viewport in pixels as a Vector2.
--- Field of view is the angle between the left and right sides of the viewport in radians.
+-- Field of view is the angle between the top and bottom of the viewport in radians as a number.
 -- Near plane is the distance to the near clipping plane.
 -- Far plane is the distance to the far clipping plane.
 -- CFrame is the position and orientation of the camera.
@@ -34,12 +34,12 @@ function RayTracingCamera:GetPixelDirection(pixel: Vector2)
     assert(pixel.Y >= 0 and pixel.Y <= self.Resolution.Y, "Pixel Y value out of bounds.")
 
     -- Calculate the vertical field of view.
-    local verticalFieldOfView = self.FieldOfView * (self.Resolution.Y / self.Resolution.X)
+    local horizontalFieldOfView = self.FieldOfView * (self.Resolution.X / self.Resolution.Y)
     
     -- Calculate the pixel's horizontal angle.
-    local horizontalAngle = ((pixel.X / self.Resolution.X) * self.FieldOfView) - (self.FieldOfView / 2)
+    local horizontalAngle = ((pixel.X / self.Resolution.X) * horizontalFieldOfView) - (horizontalFieldOfView / 2)
     -- Calculate the pixel's vertical angle.
-    local verticalAngle = ((pixel.Y / self.Resolution.Y) * verticalFieldOfView) - (verticalFieldOfView / 2)
+    local verticalAngle = ((pixel.Y / self.Resolution.Y) * self.FieldOfView) - (self.FieldOfView / 2)
 
     -- Calculate the pixel vector.
     local pixelVector = CFrame.Angles(verticalAngle, -horizontalAngle, 0).LookVector
