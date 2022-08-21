@@ -29,7 +29,7 @@ function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxB
     return self
 end
 
--- Trace a ray recursively until it hits nothing or the maximum number of bounces.
+-- Trace a ray until it hits nothing or the maximum number of bounces.
 function TracedRay:Trace()
     local result = workspace:Raycast(self.Origin, self.Direction, self.RaycastParams)
     if result then
