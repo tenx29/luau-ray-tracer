@@ -15,11 +15,10 @@ export type RayTracingCamera = {
 local RayTracingCamera = {}
 RayTracingCamera.__index = RayTracingCamera
 
-function RayTracingCamera.new(resolution: Vector2, fieldOfView: number, nearPlane: number, farPlane: number, cFrame: CFrame)
+function RayTracingCamera.new(resolution: Vector2, fieldOfView: number, farPlane: number, cFrame: CFrame)
     local self = setmetatable({}, RayTracingCamera)
     self.Resolution = resolution
     self.FieldOfView = fieldOfView
-    self.NearPlane = nearPlane
     self.FarPlane = farPlane
     self.CFrame = cFrame
     return self
