@@ -45,6 +45,7 @@ function PostProcessingShader:GetAdjacentPixels(Pixel: Vector2, Resolution: Vect
 end
 
 function PostProcessingShader:Process(RayTracer: RayTracer, ...)
+    if not self.Function then return end
     return self.Function(RayTracer, ...)
 end
 
