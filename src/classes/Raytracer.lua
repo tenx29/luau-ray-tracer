@@ -24,6 +24,13 @@ function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number?, Shaders: {
     return self
 end
 
+-- Clear all buffers
+function RayTracer:ClearBuffers()
+    self.Buffers.Color = {}
+    self.Buffers.Depth = {}
+    self.Buffers.Normal = {}
+end
+
 -- Visualise the normal buffer
 function RayTracer:VisualiseNormalBuffer(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
@@ -31,9 +38,7 @@ end
 
 -- Render the entire frame
 function RayTracer:Render(): {{Color3}}
-    self.Buffers.Color = {}
-    self.Buffers.Depth = {}
-    self.Buffers.Normal = {}
+    self:ClearBuffers()
     for x = 1, self.Camera.Resolution.X do
         self.Buffers.Color[x] = {}
         self.Buffers.Depth[x] = {}
