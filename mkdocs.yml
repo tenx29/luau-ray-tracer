@@ -1,0 +1,59 @@
+site_name: Luau Ray Tracer Documentation
+site_url: https://tenx29.github.io/luau-ray-tracer/
+repo_name: tenx29/luau-ray-tracer
+repo_url: https://github.com/tenx29/luau-ray-tracer/
+
+nav:
+  - About: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Tutorial setup: getting-started/tutorial-setup.md
+    - Creating your first render: getting-started/first-render.md
+    - Creating your first shader: getting-started/first-shader.md
+    - Sky shaders: getting-started/sky-shaders.md
+    - Buffers: getting-started/buffers.md
+    - Post-processing: getting-started/post-processing.md
+    - Advanced shading: getting-started/advanced-shading.md
+  - API Reference:
+      - The Render Pipeline: api-reference/render-pipeline.md
+      - Ray Tracing Camera: api-reference/ray-tracing-camera.md
+      - Ray Tracer: api-reference/ray-tracer.md
+      - Traced Ray: api-reference/traced-ray.md
+      - Shader: api-reference/shader.md
+      - Post Processing Shader: api-reference/post-processing-shader.md
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: light-green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: light-green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+  
