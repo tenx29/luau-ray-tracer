@@ -54,7 +54,7 @@ end
 
 -- Helper function to continue a ray.
 function Shader:Continue(Ray: TracedRay, Hit: RaycastResult)
-    return TracedRay.new(Ray.Pixel, Hit.Position, Ray.Direction, Ray.MaxBounces, Ray.RaycastParams, Ray.Shaders):Trace()
+    return TracedRay.new(Ray.Pixel, Hit.Position, Ray.Direction, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders):Trace()
 end
 
 -- Process the vertex shader
