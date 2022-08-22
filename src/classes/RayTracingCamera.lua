@@ -42,7 +42,7 @@ function RayTracingCamera:GetPixelDirection(pixel: Vector2): Vector3
     local verticalAngle = ((pixel.Y / self.Resolution.Y) * self.FieldOfView) - (self.FieldOfView / 2)
 
     -- Calculate the pixel vector.
-    local pixelVector = CFrame.Angles(verticalAngle, -horizontalAngle, 0).LookVector
+    local pixelVector = CFrame.Angles(-verticalAngle, -horizontalAngle, 0).LookVector
     
     return pixelVector
 end
