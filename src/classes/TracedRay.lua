@@ -40,7 +40,7 @@ function TracedRay:Trace()
             }
         end
         self.Bounces += 1
-        if self.Bounces < self.MaxBounces then
+        if self.Bounces <= self.MaxBounces then
             for _, Shader in self.Shaders do
                 self.Color = Shader:Process(self, result) or self.Color
             end
