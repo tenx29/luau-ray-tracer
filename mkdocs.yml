@@ -14,6 +14,7 @@ nav:
     - Buffers: getting-started/buffers.md
     - Post-processing: getting-started/post-processing.md
     - Advanced shading: getting-started/advanced-shading.md
+    - Advanced post-processing: getting-started/advanced-post-processing.md
   - API Reference:
       - The Render Pipeline: api-reference/render-pipeline.md
       - Ray Tracing Camera: api-reference/ray-tracing-camera.md
