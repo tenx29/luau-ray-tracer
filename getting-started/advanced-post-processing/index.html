@@ -995,7 +995,7 @@
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>When using custom buffers, make sure that each buffer is available when the post-processing shader is called. Post-processing shaders are called in the order that they are defined in the <code>RayTracer.PostProcessingShaders</code> table. In the previous example, the Threshold shader would be called after the Luma shader, so the RayTracer's PostProcessingShaders table would look like this:
-<div class="highlight"><pre><span></span><code><span class="n">RayTracer</span><span class="p">.</span><span class="n">PostProcessingShaders</span> <span class="o">=</span> <span class="p">{</span><span class="n">Luma</span><span class="p">,</span> <span class="n">Threshold</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">RayTracer</span><span class="p">.</span><span class="n">PostProcessingShaders</span> <span class="o">=</span> <span class="p">{</span><span class="n">Luma</span><span class="p">,</span> <span class="n">Threshold</span><span class="p">,</span> <span class="n">ThresholdBlur</span><span class="p">,</span> <span class="n">Bloom</span><span class="p">}</span>
 </code></pre></div></p>
 </div>
 
