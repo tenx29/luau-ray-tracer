@@ -234,5 +234,5 @@ There we have it! Admittedly, this particular bloom effect doesn't look very goo
 !!! important
     When using custom buffers, make sure that each buffer is available when the post-processing shader is called. Post-processing shaders are called in the order that they are defined in the `RayTracer.PostProcessingShaders` table. In the previous example, the Threshold shader would be called after the Luma shader, so the RayTracer's PostProcessingShaders table would look like this:
     ```lua
-    RayTracer.PostProcessingShaders = {Luma, Threshold}
+    RayTracer.PostProcessingShaders = {Luma, Threshold, ThresholdBlur, Bloom}
     ```
