@@ -1,6 +1,6 @@
 # About Luau Ray Tracer
 
-Luau Ray Tracer is an open-source object-oriented path tracing module for Luau.
+Luau Ray Tracer is an open-source object-oriented path tracing module for Luau. The Ray Tracer gives you as much control over the scene, materials, and lights as possible while still keeping it simple to use.
 
 !!! info
     Basic understanding of Luau and object-oriented programming is assumed in this documentation.

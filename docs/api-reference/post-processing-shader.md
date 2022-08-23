@@ -39,9 +39,9 @@ Optional user-defined attributes to pass to the shader.
 ## Methods
 ---
 
-### [dict](https://developer.roblox.com/en-us/articles/Table#dictionaries) Process([RayTracer](ray-tracer.md), <arg>...</arg>)
+### [dict](https://developer.roblox.com/en-us/articles/Table#dictionaries) Process([RayTracer](ray-tracer.md) <arg>rayTracer</arg>, <arg>...</arg>)
 
-Processes the shader. <arg>...</arg> is a list of optional arguments to pass to the shader.
+Processes the shader. <arg>rayTracer</arg> is the Ray Tracer that is emitting the rays. <arg>...</arg> is a list of optional arguments to pass to the shader.
 
 !!! note
     The shader function is expected to return nil or all buffers in a dictionary.

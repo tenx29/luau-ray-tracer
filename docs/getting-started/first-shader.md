@@ -28,7 +28,7 @@ Now that we have a camera and a RayTracer, we're ready to start defining shaders
             for y = 1, #image[x] do
                 local pixel = Instance.new("Part")
                 pixel.Size = Vector3.new(1, 1, 0)
-                pixel.Position = Vector3.new(x, y, -resolution.X)-Vector3.new(resolution.X/2, resolution.Y/2, 0)
+                pixel.Position = Vector3.new(x, resolution.Y-y, -resolution.X)-Vector3.new(resolution.X/2, resolution.Y/2, 0)
                 pixel.Anchored = true
                 pixel.CanCollide = false
                 pixel.CanTouch = false
