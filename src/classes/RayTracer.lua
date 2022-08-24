@@ -31,14 +31,14 @@ function RayTracer:ClearBuffers()
     end
 end
 
--- Add a buffer to the raytracer
-function RayTracer:AddBuffer(BufferName: string)
-    self.Buffers[BufferName] = {}
+-- Create a new buffer for the raytracer
+function RayTracer:CreateBuffer(Name: string)
+    self.Buffers[Name] = {}
 end
 
 -- Remove a buffer from the raytracer
-function RayTracer:RemoveBuffer(BufferName: string)
-    self.Buffers[BufferName] = nil
+function RayTracer:RemoveBuffer(Name: string)
+    self.Buffers[Name] = nil
 end
 
 -- Visualise the normal buffer
