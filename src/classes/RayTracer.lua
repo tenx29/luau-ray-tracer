@@ -26,9 +26,19 @@ end
 
 -- Clear all buffers
 function RayTracer:ClearBuffers()
-    self.Buffers.Color = {}
-    self.Buffers.Depth = {}
-    self.Buffers.Normal = {}
+    for _, buffer in pairs(self.Buffers) do
+        buffer = {}
+    end
+end
+
+-- Add a buffer to the raytracer
+function RayTracer:AddBuffer(BufferName: string)
+    self.Buffers[BufferName] = {}
+end
+
+-- Remove a buffer from the raytracer
+function RayTracer:RemoveBuffer(BufferName: string)
+    self.Buffers[BufferName] = nil
 end
 
 -- Visualise the normal buffer
@@ -40,22 +50,19 @@ end
 function RayTracer:Render(...): {{Color3}}
     self:ClearBuffers()
     for x = 1, self.Camera.Resolution.X do
-        self.Buffers.Color[x] = {}
-        self.Buffers.Depth[x] = {}
-        self.Buffers.Normal[x] = {}
+        for _, buffer in self.Buffers do
+            buffer[x] = {}
+        end
         for y = 1, self.Camera.Resolution.Y do
             local Pixel = Vector2.new(x, y)
             local Origin, Direction = self.Camera:GetRay(Pixel)
 
             local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders)
-            local color = Ray:Trace(...).Color
-            if type(color) == "number" then
-                color = Color3.new(color, color, color)
-            end
+            local result = Ray:Trace(...)
 
-            self.Buffers.Color[x][y] = color
-            self.Buffers.Depth[x][y] = Ray.InitialCollision.Distance
-            self.Buffers.Normal[x][y] = self:VisualizeNormal(Ray.InitialCollision.Normal)
+            for buffer, value in pairs(result.Out) do
+                self.Buffers[buffer][x][y] = value
+            end
         end
     end
     return self.Buffers.Color
