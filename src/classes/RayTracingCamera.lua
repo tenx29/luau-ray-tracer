@@ -34,7 +34,7 @@ end
 -- @return [T:Vector3] The size of the far clip plane in studs.
 function RayTracingCamera:GetFarPlaneSize()
     local aspectRatio = self.Resolution.X / self.Resolution.Y
-    if self.Projection == 'perspective' then
+    if self.Projection:lower() == 'perspective' then
         local halfFov = self.FieldOfView / 2
         local farPlaneSize = 2 * math.tan(halfFov) * self.FarPlane
         return Vector3.new(farPlaneSize * aspectRatio, farPlaneSize, 0)
@@ -53,7 +53,7 @@ end
 
 -- Calculate the size of the near clip plane in studs.
 function RayTracingCamera:GetNearPlaneSize()
-    if self.Projection == 'perspective' then
+    if self.Projection:lower() == 'perspective' then
         local aspectRatio = self.Resolution.X / self.Resolution.Y
         local halfFov = self.FieldOfView / 2
         local nearPlaneSize = math.tan(halfFov) * self.NearPlane
