@@ -54,3 +54,21 @@ Returns a list of adjacent pixel coordinates to <arg>pixel</arg>. <arg>resolutio
 
 !!! note
     The shape of the search area is always a square.
+
+---
+
+### [Vector3](https://create.roblox.com/docs/reference/engine/datatypes/Vector3) Color3ToVector3([Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3) <arg>color</arg>)
+
+Converts a Color3 to a Vector3 to make math operations easier.
+
+---
+
+### [Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3) Vector3ToColor3([Vector3](https://create.roblox.com/docs/reference/engine/datatypes/Vector3) <arg>vector</arg>, [boolean](https://developer.roblox.com/en-us/articles/Boolean) <arg>clamp? [=false]</arg>)
+
+Converts a Vector3 to a Color3. If <arg>clamp</arg> is true, the vector will be clamped to the range [0, 1].
+
+---
+
+### [Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3) NumberToColor3([number](https://create.roblox.com/docs/reference/engine/datatypes/number) <arg>number</arg>)
+
+Converts a number to a greyscale Color3.

@@ -177,7 +177,7 @@ myRayTracer:PostProcess()
 ```
 
 ??? abstract "The full script so far"
-    ```lua linenums="1" hl_lines="5 20 23"
+    ```lua linenums="1" hl_lines="5 21 24"
     local RayTracingCamera = require(package.classes.RayTracingCamera)
     local RayTracer = require(package.classes.RayTracer)
     local TestShader = require(package.shaders.TestShader)
@@ -187,6 +187,7 @@ myRayTracer:PostProcess()
     -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
     local resolution = Vector2.new(100, 100)
     local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+    local nearPlane = 0.1              -- The near plane determines how close the camera can be to an object before it is clipped.
     local farPlane = 100                -- How far the camera can see.
 
     -- We'll place the camera 5 studs above the world origin.
@@ -194,7 +195,7 @@ myRayTracer:PostProcess()
     local CFrame = CFrame.new(Vector3.new(0,5,0))
 
     -- Create the camera.
-    local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+    local myCamera = RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 
     -- We won't be defining shaders just yet, so we don't need to pass any parameters except the camera.
     local myRayTracer = RayTracer.new(myCamera, 1, {SkyShader, TestShader}, {EdgeDetection})

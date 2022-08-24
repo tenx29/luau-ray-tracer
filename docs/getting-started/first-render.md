@@ -12,6 +12,7 @@ local RayTracingCamera = require(package.classes.RayTracingCamera)
 -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
 local resolution = Vector2(100, 100)
 local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+local nearPlane = 0.1               -- The near plane determines how close the camera can be to an object before it is clipped.
 local farPlane = 100                -- How far the camera can see.
 
 -- We'll place the camera 5 studs above the world origin.
@@ -19,7 +20,7 @@ local farPlane = 100                -- How far the camera can see.
 local CFrame = CFrame.new(Vector3.new(0,5,0))
 
 -- Create the camera.
-local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+local myCamera = RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 ```
 
 <br>
@@ -55,6 +56,7 @@ local image = myRayTracer:Render()
     -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
     local resolution = Vector2(100, 100)
     local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+    local nearPlane = 0.1               -- The near plane determines how close the camera can be to an object before it is clipped.
     local farPlane = 100                -- How far the camera can see.
 
     -- We'll place the camera 5 studs above the world origin.
@@ -62,7 +64,7 @@ local image = myRayTracer:Render()
     local CFrame = CFrame.new(Vector3.new(0,5,0))
 
     -- Create the camera.
-    local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+    RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 
     -- We won't be defining shaders just yet, so we don't need to pass any parameters except the camera.
     local myRayTracer = RayTracer.new(myCamera)
@@ -107,13 +109,14 @@ showImage(image)
 ```
 
 ??? abstract "Full script so far"
-    ```lua linenums="1" hl_lines="21-40"
+    ```lua linenums="1" hl_lines="22-41"
     local RayTracingCamera = require(package.classes.RayTracingCamera)
     local RayTracer = require(package.classes.RayTracer)
 
     -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
     local resolution = Vector2.new(100, 100)
     local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+    local nearPlane = 0.1               -- The near plane determines how close the camera can be to an object before it is clipped.
     local farPlane = 100                -- How far the camera can see.
 
     -- We'll place the camera 5 studs above the world origin.
@@ -121,7 +124,7 @@ showImage(image)
     local CFrame = CFrame.new(Vector3.new(0,5,0))
 
     -- Create the camera.
-    local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+    local myCamera = RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 
     -- We won't be defining shaders just yet, so we don't need to pass any parameters except the camera.
     local myRayTracer = RayTracer.new(myCamera)

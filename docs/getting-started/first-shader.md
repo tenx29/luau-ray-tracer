@@ -9,6 +9,7 @@ Now that we have a camera and a RayTracer, we're ready to start defining shaders
     -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
     local resolution = Vector2.new(100, 100)
     local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+    local nearPlane = 0.1               -- The near plane determines how close the camera can be to an object before it is clipped.
     local farPlane = 100                -- How far the camera can see.
 
     -- We'll place the camera 5 studs above the world origin.
@@ -16,7 +17,7 @@ Now that we have a camera and a RayTracer, we're ready to start defining shaders
     local CFrame = CFrame.new(Vector3.new(0,5,0))
 
     -- Create the camera.
-    local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+    local myCamera = RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 
     -- We won't be defining shaders just yet, so we don't need to pass any parameters except the camera.
     local myRayTracer = RayTracer.new(myCamera)
@@ -76,8 +77,10 @@ When a TracedRay terminates for any reason (i.e. it hits an object or the far pl
         -- Only apply the shader to objects whose name is 'Mirror'.
         if Hit.Instance.Name == 'Mirror' then
             local Normal = Hit.Normal
+            local out = Ray.Out
             -- Create a reflection ray and return the color of the reflected ray.
-            return Shader:Reflect(Ray, Hit, Normal).Color
+            out.Color = Shader:Reflect(Ray, Hit, Normal).Color
+            return out
         end
     end
 
@@ -106,7 +109,8 @@ TestShader.Function = function(Ray, Hit, ...)
     -- If the ray didn't hit anything, skip this shader.
     if not Hit then return end
     -- Return the color of the object that was hit.
-    return Hit.Instance.Color
+    Ray.Out.Color = Hit.Instance.Color
+    return Ray.Out
 end
 
 -- Finally return the shader so we can use it.
@@ -131,7 +135,7 @@ local myRayTracer = RayTracer.new(myCamera, 1, {TestShader})
 Note that we're passing 3 arguments to the RayTracer now. The second argument is the maximum number of bounces that the ray can make before it's terminated. The third argument is an array of shaders to apply to the ray. In this case, we only have one shader, so we'll pass an array of length 1. Because our shader does not have reflections or refractions, 1 is enough for the maximum number of bounces.
 
 ??? abstract "Full script so far"
-    ```lua linenums="1" hl_lines="3 18"
+    ```lua linenums="1" hl_lines="3 19"
     local RayTracingCamera = require(package.classes.RayTracingCamera)
     local RayTracer = require(package.classes.RayTracer)
     local TestShader = require(package.shaders.TestShader)
@@ -139,6 +143,7 @@ Note that we're passing 3 arguments to the RayTracer now. The second argument is
     -- We'll use a resolution of 100x100 to avoid having to wait too long for the render to complete.
     local resolution = Vector2.new(100, 100)
     local fieldOfView = math.rad(70)    -- Field of view is measured in radians.
+    local nearPlane = 0.1               -- The near plane determines how close the camera can be to an object before it is clipped.
     local farPlane = 100                -- How far the camera can see.
 
     -- We'll place the camera 5 studs above the world origin.
@@ -146,7 +151,7 @@ Note that we're passing 3 arguments to the RayTracer now. The second argument is
     local CFrame = CFrame.new(Vector3.new(0,5,0))
 
     -- Create the camera.
-    local myCamera = RayTracingCamera.new(resolution, fieldOfView, farPlane, CFrame)
+    local myCamera = RayTracingCamera.new(resolution, fieldOfView, nearPlane, farPlane, CFrame)
 
     -- We won't be defining shaders just yet, so we don't need to pass any parameters except the camera.
     local myRayTracer = RayTracer.new(myCamera, 1, {TestShader})

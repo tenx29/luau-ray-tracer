@@ -59,10 +59,23 @@ Clears all buffers of the RayTracer.
 
 ---
 
-### [2D table](https://developer.roblox.com/en-us/articles/Table)<[Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3)> Render()
-Clears all buffers and renders the scene. Returns the color buffer after the render is complete.
+### [void](#void-raytracerrender) CreateBuffer([string](https://developer.roblox.com/en-us/articles/String) <arg>name</arg>, <arg>default [=0]</arg>)
+Creates a new empty buffer with the given name. <arg>default</arg> is the default value that will be used for all pixels in the buffer and will be used to initialise **[TracedRay.Out](traced-ray.md#dict-out)** when rendering. If <arg>default</arg> is not provided, 0 will be used. The default value can be any type.
+
+!!! tip
+    Buffers created before calling **[RayTracer.Render](#2d-tablecolor3-render)** can be written to by vertex shaders during the render process.
+
+---
+
+### [void](#void-raytracerrender) RemoveBuffer([string](https://developer.roblox.com/en-us/articles/String) <arg>name</arg>)
+Removes the buffer with the given name.
+
+---
+
+### [2D table](https://developer.roblox.com/en-us/articles/Table)<[Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3)> Render(<arg>...</arg>)
+Clears all buffers and renders the scene. Returns the color buffer after the render is complete. <arg>...</arg> is the arguments that will be passed to the shaders.
 !!! note
-    Post-processing shaders are not applied in this method. To apply post-processing shaders, use the **[PostProcess](#postprocess)** method after the initial render is complete.
+    Post-processing shaders are not applied in this method. To apply post-processing shaders, use the **[PostProcess](#dict-postprocess)** method after the initial render is complete.
 
 ---
 
@@ -76,7 +89,7 @@ Gets the color of the pixel at <arg>x</arg>, <arg>y</arg> from the color buffer.
 
 ---
 
-### [void](#void-raytracersetpixelinthttpsdeveloperrobloxcomen-usarticlesnumbers-argxarg-inthttpsdeveloperrobloxcomen-usarticlesnumbers-argyarg-color3httpscreaterobloxcomdocsreferenceenginedatatypescolor3-argcolorarg) SetPixel([int](https://developer.roblox.com/en-us/articles/Numbers) <arg>x</arg>, [int](https://developer.roblox.com/en-us/articles/Numbers) <arg>y</arg>, [Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3) <arg>color</arg>)
+### [void](#color3-getpixelint-x-int-y) SetPixel([int](https://developer.roblox.com/en-us/articles/Numbers) <arg>x</arg>, [int](https://developer.roblox.com/en-us/articles/Numbers) <arg>y</arg>, [Color3](https://create.roblox.com/docs/reference/engine/datatypes/Color3) <arg>color</arg>)
 Sets the color of the pixel at <arg>x</arg>, <arg>y</arg> in the color buffer.
 
 ---
