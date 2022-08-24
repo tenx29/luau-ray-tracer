@@ -37,7 +37,7 @@ function RayTracer:VisualizeNormal(normal: Vector3): Color3
 end
 
 -- Render the entire frame
-function RayTracer:Render(): {{Color3}}
+function RayTracer:Render(...): {{Color3}}
     self:ClearBuffers()
     for x = 1, self.Camera.Resolution.X do
         self.Buffers.Color[x] = {}
@@ -48,7 +48,7 @@ function RayTracer:Render(): {{Color3}}
             local Origin, Direction = self.Camera:GetRay(Pixel)
 
             local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders)
-            local color = Ray:Trace().Color
+            local color = Ray:Trace(...).Color
             if type(color) == "number" then
                 color = Color3.new(color, color, color)
             end

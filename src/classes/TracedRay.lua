@@ -30,7 +30,7 @@ function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxB
 end
 
 -- Trace a ray until it hits nothing or the maximum number of bounces.
-function TracedRay:Trace()
+function TracedRay:Trace(...)
     local result = workspace:Raycast(self.Origin, self.Direction, self.RaycastParams)
     if result then
         if self.Bounces == 0 then
@@ -42,19 +42,19 @@ function TracedRay:Trace()
         self.Bounces += 1
         if self.Bounces <= self.MaxBounces then
             for _, Shader in self.Shaders do
-                self.Color = Shader:Process(self, result) or self.Color
+                self.Color = Shader:Process(self, result, ...) or self.Color
             end
         end
     else
         self.InitialDepth = 1
         for _, Shader in self.Shaders do
-            self.Color = Shader:Process(self, nil) or self.Color
+            self.Color = Shader:Process(self, nil, ...) or self.Color
         end
     end
     if self.Color == Color3.fromRGB(255, 0, 255) then
         -- Fallback color
         for _, Shader in self.Shaders do
-            self.Color = Shader:Process(self, result) or self.Color
+            self.Color = Shader:Process(self, result, ...) or self.Color
         end
     end
     return self
