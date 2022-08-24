@@ -58,10 +58,10 @@ function RayTracer:Render(...): {{Color3}}
             local Origin, Direction = self.Camera:GetRay(Pixel)
 
             local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders)
-            local result = Ray:Trace(...)
+            local result = Ray:Trace(...).Out
 
-            for buffer, value in pairs(result.Out) do
-                self.Buffers[buffer][x][y] = value
+            for buffer, _ in pairs(self.Buffers) do
+                self.Buffers[buffer][x][y] = result[buffer] or 0
             end
         end
     end
