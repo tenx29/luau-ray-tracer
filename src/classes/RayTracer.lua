@@ -45,8 +45,9 @@ function RayTracer:Render(): {{Color3}}
         self.Buffers.Normal[x] = {}
         for y = 1, self.Camera.Resolution.Y do
             local Pixel = Vector2.new(x, y)
-            local Direction = self.Camera:GetPixelDirection(Pixel)*self.Camera.FarPlane
-            local Ray = TracedRay.new(Pixel, self.Camera.CFrame.Position, Direction, self.MaxBounces, nil, self.Shaders)
+            local Origin, Direction = self.Camera:GetRay(Pixel)
+
+            local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders)
             local color = Ray:Trace().Color
             if type(color) == "number" then
                 color = Color3.new(color, color, color)
