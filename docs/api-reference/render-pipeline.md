@@ -8,19 +8,23 @@ flowchart LR
         A[Ray] --> B[Termination data];
         B --> C[Shaders];
         C -.-> R[Bounced Rays];
-        C --> D[Color];
-        R -.-> D;
+        R -.-> C;
+        C --> D[Ray output];
     end
 
     subgraph Ray Tracer Buffers
         E[Color];
         F[Depth];
         G[Normal];
+        I[Custom buffers];
     end
 
-    D --> E;
-    B ----> F;
-    B ----> G;
+    B --> D;
 
-    E & F & G <---> H[Post-processing shaders];
+    D --> E;
+    D --> F;
+    D --> G;
+    D --> I;
+
+    E & F & G & I <---> H[Post-processing shaders];
 ```
