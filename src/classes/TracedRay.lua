@@ -54,7 +54,7 @@ function TracedRay:Trace()
     if self.Color == Color3.fromRGB(255, 0, 255) then
         -- Fallback color
         for _, Shader in self.Shaders do
-            self.Color = Shader:Process(self, nil) or self.Color
+            self.Color = Shader:Process(self, result) or self.Color
         end
     end
     return self
