@@ -21,6 +21,11 @@ function RayTracer.new(Camera: RayTracingCamera, MaxBounces: number?, Shaders: {
         Depth = {};
         Normal = {};
     }
+    self.BufferDefaults = {
+        Color = Color3.new(1, 0, 1);
+        Depth = 1;
+        Normal = Vector3.new(0, 0, 0);
+    }
     return self
 end
 
@@ -32,8 +37,9 @@ function RayTracer:ClearBuffers()
 end
 
 -- Create a new buffer for the raytracer
-function RayTracer:CreateBuffer(Name: string)
+function RayTracer:CreateBuffer(Name: string, Default: any)
     self.Buffers[Name] = {}
+    self.BufferDefaults[Name] = Default or 0
 end
 
 -- Remove a buffer from the raytracer
@@ -46,18 +52,14 @@ function RayTracer:VisualizeNormal(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
--- Helper function to generate default values for buffers.
+-- Helper function to generate a copy of the default values for buffers.
 -- This ensures that the Out property of each TracedRay has values for all buffers.
 function RayTracer:DefaultBufferValues()
     local defaults = {}
 
-    for buffer, _ in pairs(self.Buffers) do
-        defaults[buffer] = 0
+    for buffer, _ in pairs(self.BufferDefaults) do
+        defaults[buffer] = self.BufferDefaults[buffer]
     end
-
-    defaults.Color = Color3.new(1, 0, 1);
-    defaults.Depth = 1
-    defaults.Normal = Vector3.new(0, 0, 0)
 
     return defaults
 end
@@ -78,6 +80,10 @@ function RayTracer:Render(...): {{Color3}}
             local result = Ray:Trace(...).Out
 
             for buffer, _ in pairs(self.Buffers) do
+                if buffer == "Normal" then
+                    self.Buffers[buffer][x][y] = self:VisualizeNormal(result.Normal)
+                    continue
+                end
                 self.Buffers[buffer][x][y] = result[buffer] or 0
             end
         end

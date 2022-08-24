@@ -17,10 +17,6 @@ function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxB
     self.Pixel = Pixel
     self.Color = Color3.fromRGB(255, 0, 255)
     self.Bounces = 0
-    self.InitialCollision = {
-        Distance = 1;
-        Normal = Vector3.new(0, 0, 0);
-    }
     self.Origin = Origin
     self.Direction = Direction
     self.MaxBounces = MaxBounces
@@ -51,20 +47,17 @@ end
 function TracedRay:Trace(...)
     local result = workspace:Raycast(self.Origin, self.Direction, self.RaycastParams)
     if result then
-        if self.Bounces == 0 then
-            self.InitialCollision = {
-                Distance = (result.Position - self.Origin).Magnitude / self.Direction.Magnitude;
-                Normal = result.Normal;
-            }
-        end
         self.Bounces += 1
         if self.Bounces <= self.MaxBounces then
             for _, Shader in self.Shaders do
                 applyShaderResult(self, Shader:Process(self, result, ...))
             end
         end
+
+        -- Add depth and normal to output. These cannot be overwritten by shaders.
+        self.Out.Depth = (result.Position - self.Origin).Magnitude / self.Direction.Magnitude
+        self.Out.Normal = result.Normal
     else
-        self.InitialDepth = 1
         for _, Shader in self.Shaders do
             applyShaderResult(self, Shader:Process(self, result, ...))
         end
@@ -75,6 +68,7 @@ function TracedRay:Trace(...)
             applyShaderResult(self, Shader:Process(self, result, ...))
         end
     end
+
     return self
 end
 
