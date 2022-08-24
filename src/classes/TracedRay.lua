@@ -28,6 +28,14 @@ function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxB
         Depth = 1;
         Normal = Vector3.new(0, 0, 0);
     }
+
+    -- Create a shallow copy of the out defaults to avoid modifying them.
+    self.OutDefaults = {}
+
+    for k, v in pairs(self.Out) do
+        self.OutDefaults[k] = v
+    end
+
     return self
 end
 

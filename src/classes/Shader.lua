@@ -27,7 +27,13 @@ function Shader:Reflect(Ray: TracedRay, Hit: RaycastResult, Normal: Vector3)
     local Direction = Ray.Direction
     local Dot = Direction:Dot(Normal)
     local Reflected = Direction - (Normal * 2 * Dot)
-    return TracedRay.new(Ray.Pixel, Hit.Position, Reflected, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders):Trace()
+
+    local OutDefaultsCopy = {}
+    for k, v in pairs(Ray.OutDefaults) do
+        OutDefaultsCopy[k] = v
+    end
+
+    return TracedRay.new(Ray.Pixel, Hit.Position, Reflected, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders, OutDefaultsCopy):Trace()
 end
 
 -- Helper function to create a refracted ray.
@@ -37,7 +43,13 @@ function Shader:Refract(Ray: TracedRay, Hit: RaycastResult, Normal: Vector3, Ref
     local RefractiveIndexRatio = RefractiveIndex / 1.0
     local CosTheta = math.sqrt(1 - (RefractiveIndexRatio * RefractiveIndexRatio) * (1 - (Dot * Dot)))
     local Refracted = RefractiveIndexRatio * Direction + (Normal * (RefractiveIndexRatio * Dot - CosTheta))
-    return TracedRay.new(Ray.Pixel, Hit.Position, Refracted, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders):Trace()
+
+    local OutDefaultsCopy = {}
+    for k, v in pairs(Ray.OutDefaults) do
+        OutDefaultsCopy[k] = v
+    end
+
+    return TracedRay.new(Ray.Pixel, Hit.Position, Refracted, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders, OutDefaultsCopy):Trace()
 end
 
 -- Helper function to determine intersection end point and length with simple geometry.
@@ -53,7 +65,12 @@ end
 
 -- Helper function to continue a ray.
 function Shader:Continue(Ray: TracedRay, Hit: RaycastResult)
-    return TracedRay.new(Ray.Pixel, Hit.Position, Ray.Direction, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders):Trace()
+    local OutDefaultsCopy = {}
+    for k, v in pairs(Ray.OutDefaults) do
+        OutDefaultsCopy[k] = v
+    end
+
+    return TracedRay.new(Ray.Pixel, Hit.Position, Ray.Direction, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders, OutDefaultsCopy):Trace()
 end
 
 -- Convert a Color3 to a Vector3.
