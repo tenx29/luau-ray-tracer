@@ -44,6 +44,25 @@ function PostProcessingShader:GetAdjacentPixels(Pixel: Vector2, Resolution: Vect
     return Pixels
 end
 
+-- Convert a Color3 to a Vector3.
+function Shader:Color3ToVector3(Color: Color3)
+    return Vector3.new(Color.R, Color.G, Color.B)
+end
+
+-- Convert a Vector3 to a Color3.
+function Shader:Vector3ToColor3(Vector: Vector3, Clamp: boolean?)
+    if Clamp then
+        return Color3.new(math.clamp(Vector.X, 0, 1), math.clamp(Vector.Y, 0, 1), math.clamp(Vector.Z, 0, 1))
+    else
+        return Color3.new(Vector.X, Vector.Y, Vector.Z)
+    end
+end
+
+-- Convert a number to a Color3.
+function Shader:NumberToColor3(Number: number)
+    return Color3.new(Number, Number, Number)
+end
+
 function PostProcessingShader:Process(RayTracer: RayTracer, ...)
     if not self.Function then return end
     return self.Function(RayTracer, ...)

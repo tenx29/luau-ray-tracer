@@ -51,10 +51,28 @@ function Shader:ComplexIntersect(Origin: Vector3, Direction: Vector3, Object: In
     return endPoints[1], (Origin-endPoints[1]).Magnitude
 end
 
-
 -- Helper function to continue a ray.
 function Shader:Continue(Ray: TracedRay, Hit: RaycastResult)
     return TracedRay.new(Ray.Pixel, Hit.Position, Ray.Direction, Ray.MaxBounces-Ray.Bounces, Ray.RaycastParams, Ray.Shaders):Trace()
+end
+
+-- Convert a Color3 to a Vector3.
+function Shader:Color3ToVector3(Color: Color3)
+    return Vector3.new(Color.R, Color.G, Color.B)
+end
+
+-- Convert a Vector3 to a Color3.
+function Shader:Vector3ToColor3(Vector: Vector3, Clamp: boolean?)
+    if Clamp then
+        return Color3.new(math.clamp(Vector.X, 0, 1), math.clamp(Vector.Y, 0, 1), math.clamp(Vector.Z, 0, 1))
+    else
+        return Color3.new(Vector.X, Vector.Y, Vector.Z)
+    end
+end
+
+-- Convert a number to a Color3.
+function Shader:NumberToColor3(Number: number)
+    return Color3.new(Number, Number, Number)
 end
 
 -- Process the vertex shader
