@@ -577,7 +577,8 @@
     <span class="c1">-- If the ray hit something, skip this shader.</span>
     <span class="kr">if</span> <span class="n">Hit</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
     <span class="c1">-- Let&#39;s return a solid light blue color to represent the sky.</span>
-    <span class="kr">return</span> <span class="n">Color3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span><span class="p">.</span><span class="n">Color</span> <span class="o">=</span> <span class="n">Color3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span>
 <span class="kr">end</span>
 
 <span class="kr">return</span> <span class="n">SkyShader</span>
@@ -633,7 +634,8 @@
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">RayTracer</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracer</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">TestShader</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">shaders</span><span class="p">.</span><span class="n">TestShader</span><span class="p">)</span>
 <span class="hll"><span class="kd">local</span> <span class="n">SkyShader</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">shaders</span><span class="p">.</span><span class="n">SkyShader</span><span class="p">)</span>
@@ -641,6 +643,7 @@
 <span class="c1">-- We&#39;ll use a resolution of 100x100 to avoid having to wait too long for the render to complete.</span>
 <span class="kd">local</span> <span class="n">resolution</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">fieldOfView</span> <span class="o">=</span> <span class="nb">math.rad</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>    <span class="c1">-- Field of view is measured in radians.</span>
+<span class="kd">local</span> <span class="n">nearPlane</span> <span class="o">=</span> <span class="mf">0.1</span>              <span class="c1">-- The near plane determines how close the camera can be to an object before it is clipped.</span>
 <span class="kd">local</span> <span class="n">farPlane</span> <span class="o">=</span> <span class="mi">100</span>                <span class="c1">-- How far the camera can see.</span>
 
 <span class="c1">-- We&#39;ll place the camera 5 studs above the world origin.</span>
@@ -648,7 +651,7 @@
 <span class="kd">local</span> <span class="n">CFrame</span> <span class="o">=</span> <span class="n">CFrame</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="c1">-- Create the camera.</span>
-<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">nearPlane</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
 
 <span class="c1">-- We won&#39;t be defining shaders just yet, so we don&#39;t need to pass any parameters except the camera.</span>
 <span class="hll"><span class="kd">local</span> <span class="n">myRayTracer</span> <span class="o">=</span> <span class="n">RayTracer</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">myCamera</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="n">SkyShader</span><span class="p">,</span> <span class="n">TestShader</span><span class="p">})</span>

@@ -570,21 +570,25 @@
         A[Ray] --&gt; B[Termination data];
         B --&gt; C[Shaders];
         C -.-&gt; R[Bounced Rays];
-        C --&gt; D[Color];
-        R -.-&gt; D;
+        R -.-&gt; C;
+        C --&gt; D[Ray output];
     end
 
     subgraph Ray Tracer Buffers
         E[Color];
         F[Depth];
         G[Normal];
+        I[Custom buffers];
     end
 
-    D --&gt; E;
-    B ----&gt; F;
-    B ----&gt; G;
+    B --&gt; D;
 
-    E &amp; F &amp; G &lt;---&gt; H[Post-processing shaders];</code></pre>
+    D --&gt; E;
+    D --&gt; F;
+    D --&gt; G;
+    D --&gt; I;
+
+    E &amp; F &amp; G &amp; I &lt;---&gt; H[Post-processing shaders];</code></pre>
 
               
             </article>

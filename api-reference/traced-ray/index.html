@@ -517,8 +517,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders" class="md-nav__link">
-    TracedRay TracedRay.new(Vector3 origin, Vector3 direction, int maxBounces, RaycastParams raycastParams, table&lt;Shader&gt; shaders)
+  <a href="#tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders-dict-out" class="md-nav__link">
+    TracedRay TracedRay.new(Vector3 origin, Vector3 direction, int maxBounces, RaycastParams raycastParams, table&lt;Shader&gt; shaders, dict out?)
   </a>
   
 </li>
@@ -544,8 +544,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#color3-color" class="md-nav__link">
-    Color3 Color
+  <a href="#dict-out" class="md-nav__link">
+    dict Out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dict-outdefaults" class="md-nav__link">
+    dict OutDefaults
   </a>
   
 </li>
@@ -599,6 +606,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#color3-color" class="md-nav__link">
+    Color3 Color
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -614,7 +628,7 @@
         
           <li class="md-nav__item">
   <a href="#tracedray-trace" class="md-nav__link">
-    TracedRay Trace()
+    TracedRay Trace(...)
   </a>
   
 </li>
@@ -702,8 +716,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders" class="md-nav__link">
-    TracedRay TracedRay.new(Vector3 origin, Vector3 direction, int maxBounces, RaycastParams raycastParams, table&lt;Shader&gt; shaders)
+  <a href="#tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders-dict-out" class="md-nav__link">
+    TracedRay TracedRay.new(Vector3 origin, Vector3 direction, int maxBounces, RaycastParams raycastParams, table&lt;Shader&gt; shaders, dict out?)
   </a>
   
 </li>
@@ -729,8 +743,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#color3-color" class="md-nav__link">
-    Color3 Color
+  <a href="#dict-out" class="md-nav__link">
+    dict Out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dict-outdefaults" class="md-nav__link">
+    dict OutDefaults
   </a>
   
 </li>
@@ -784,6 +805,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#color3-color" class="md-nav__link">
+    Color3 Color
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -799,7 +827,7 @@
         
           <li class="md-nav__item">
   <a href="#tracedray-trace" class="md-nav__link">
-    TracedRay Trace()
+    TracedRay Trace(...)
   </a>
   
 </li>
@@ -843,16 +871,32 @@
 <p><br></p>
 <h2 id="constructor">Constructor</h2>
 <hr />
-<h3 id="tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders"><a href="./">TracedRay</a> TracedRay.new(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>origin</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>direction</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>maxBounces</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams">RaycastParams</a> <arg>raycastParams</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/table">table</a>&lt;<a href="../shader/">Shader</a>&gt; <arg>shaders</arg>)</h3>
-<p>Creates a new TracedRay. <arg>maxBounces</arg> is the maximum number of bounces the ray can make. <arg>raycastParams</arg> is the raycast parameters to use when tracing the ray. <arg>shaders</arg> is a table of shader effects to apply to the ray.</p>
+<h3 id="tracedray-tracedraynewvector3-origin-vector3-direction-int-maxbounces-raycastparams-raycastparams-tableshader-shaders-dict-out"><a href="./">TracedRay</a> TracedRay.new(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>origin</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>direction</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>maxBounces</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams">RaycastParams</a> <arg>raycastParams</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/table">table</a>&lt;<a href="../shader/">Shader</a>&gt; <arg>shaders</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/table#dictionaries">dict</a> <arg>out?</arg>)</h3>
+<p>Creates a new TracedRay. <arg>maxBounces</arg> is the maximum number of bounces the ray can make. <arg>raycastParams</arg> is the raycast parameters to use when tracing the ray. <arg>shaders</arg> is a table of shader effects to apply to the ray. <arg>out</arg> is an optional dictionary to pass initial values and available buffers to the ray.</p>
 <p><br></p>
 <h2 id="properties">Properties</h2>
 <hr />
 <h3 id="vector2-pixel"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> Pixel</h3>
 <p>The viewport pixel the ray originates from.</p>
 <hr />
-<h3 id="color3-color"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> Color</h3>
-<p>The color of the ray.</p>
+<h3 id="dict-out"><a href="https://developer.roblox.com/en-us/articles/Table#dictionaries">dict</a> Out</h3>
+<p>The output of the shader effects applied to the ray. The keys must match the names of the buffers in the Ray Tracer.</p>
+<div class="admonition example">
+<p class="admonition-title">Example of the Out property structure</p>
+<div class="highlight"><pre><span></span><code><span class="n">Out</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Color</span> <span class="o">=</span> <span class="n">Color3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Depth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">Normal</span> <span class="o">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<hr />
+<h3 id="dict-outdefaults"><a href="https://developer.roblox.com/en-us/articles/Table#dictionaries">dict</a> OutDefaults</h3>
+<p>Shallow copy of the output of the shader effects applied to the ray. These are provided to rays created using the <strong><a href="../shader/#tracedray-continuetracedray-tracedray-raycastresult-raycastresult">Continue</a></strong>, <strong><a href="../shader/#tracedray-reflecttracedray-tracedray-raycastresult-raycastresult-vector3-normal">Reflect</a></strong> and <strong><a href="../shader/#tracedray-refracttracedray-tracedray-raycastresult-raycastresult-vector3-normal-number-indexofrefraction">Refract</a></strong> Shader methods</p>
+<div class="admonition warning">
+<p class="admonition-title">Static property</p>
+<p>This property is not meant to be used directly or modified.</p>
+</div>
 <hr />
 <h3 id="int-bounces"><a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> Bounces</h3>
 <p>The number of bounces the ray has undergone.</p>
@@ -874,11 +918,18 @@
 <hr />
 <h3 id="tableshader-shaders"><a href="https://developer.roblox.com/en-us/articles/Tables">table</a>&lt;<a href="../shader/">Shader</a>&gt; Shaders</h3>
 <p>The shaders that the ray can run.</p>
+<hr />
+<h3 id="color3-color"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> Color</h3>
+<p>The color of the ray.</p>
+<div class="admonition warning">
+<p class="admonition-title">Deprecated</p>
+<p>This property is deprecated. Use the <strong><a href="#dict-out">Out</a></strong> property instead.</p>
+</div>
 <p><br></p>
 <h2 id="methods">Methods</h2>
 <hr />
-<h3 id="tracedray-trace"><a href="">TracedRay</a> Trace()</h3>
-<p>Traces the ray and runs any shader effects when the ray terminates. Returns the TracedRay object itself.</p>
+<h3 id="tracedray-trace"><a href="">TracedRay</a> Trace(<arg>...</arg>)</h3>
+<p>Traces the ray and runs any shader effects when the ray terminates. Returns the TracedRay object itself. <arg>...</arg> is the arguments to pass to the shader effects.</p>
 
               
             </article>

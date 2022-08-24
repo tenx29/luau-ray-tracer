@@ -489,8 +489,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-farplane-cframe-cframe" class="md-nav__link">
-    RayTracingCamera RayTracingCamera.new(Vector2 resolution, float fieldOfView, float farPlane, CFrame CFrame )
+  <a href="#raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-nearplane-float-farplane-cframe-cframe-string-projection-perspective-float-orthographicsize-1" class="md-nav__link">
+    RayTracingCamera RayTracingCamera.new(Vector2 resolution, float fieldOfView, float nearPlane, float farPlane, CFrame CFrame, string projection [="perspective"], float orthographicSize? [=1])
   </a>
   
 </li>
@@ -531,7 +531,21 @@
         
           <li class="md-nav__item">
   <a href="#cframe-cframe" class="md-nav__link">
-    CFRame CFrame
+    CFrame CFrame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-projection" class="md-nav__link">
+    string Projection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float-orthographicsize" class="md-nav__link">
+    float OrthographicSize
   </a>
   
 </li>
@@ -550,15 +564,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vector3-getpixeldirectionvector2-pixel" class="md-nav__link">
-    Vector3 GetPixelDirection(Vector2 pixel)
+  <a href="#vector3-getfarplanesize" class="md-nav__link">
+    Vector3 GetFarPlaneSize()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vector3-origin-vector3-direction-getinitialrayvector2-pixel" class="md-nav__link">
-    {Vector3 origin, Vector3 direction} GetInitialRay(Vector2 pixel)
+  <a href="#vector3-getnearplanesize" class="md-nav__link">
+    Vector3 GetNearPlaneSize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cframe-getnearplanecframe" class="md-nav__link">
+    CFrame GetNearPlaneCFrame()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cframe-getfarplanecframe" class="md-nav__link">
+    CFrame GetFarPlaneCFrame()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector3-origin-vector3-direction-getrayvector2-pixel" class="md-nav__link">
+    Vector3 origin, Vector3 direction GetRay(Vector2 pixel)
   </a>
   
 </li>
@@ -674,8 +709,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-farplane-cframe-cframe" class="md-nav__link">
-    RayTracingCamera RayTracingCamera.new(Vector2 resolution, float fieldOfView, float farPlane, CFrame CFrame )
+  <a href="#raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-nearplane-float-farplane-cframe-cframe-string-projection-perspective-float-orthographicsize-1" class="md-nav__link">
+    RayTracingCamera RayTracingCamera.new(Vector2 resolution, float fieldOfView, float nearPlane, float farPlane, CFrame CFrame, string projection [="perspective"], float orthographicSize? [=1])
   </a>
   
 </li>
@@ -716,7 +751,21 @@
         
           <li class="md-nav__item">
   <a href="#cframe-cframe" class="md-nav__link">
-    CFRame CFrame
+    CFrame CFrame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-projection" class="md-nav__link">
+    string Projection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float-orthographicsize" class="md-nav__link">
+    float OrthographicSize
   </a>
   
 </li>
@@ -735,15 +784,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vector3-getpixeldirectionvector2-pixel" class="md-nav__link">
-    Vector3 GetPixelDirection(Vector2 pixel)
+  <a href="#vector3-getfarplanesize" class="md-nav__link">
+    Vector3 GetFarPlaneSize()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#vector3-origin-vector3-direction-getinitialrayvector2-pixel" class="md-nav__link">
-    {Vector3 origin, Vector3 direction} GetInitialRay(Vector2 pixel)
+  <a href="#vector3-getnearplanesize" class="md-nav__link">
+    Vector3 GetNearPlaneSize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cframe-getnearplanecframe" class="md-nav__link">
+    CFrame GetNearPlaneCFrame()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cframe-getfarplanecframe" class="md-nav__link">
+    CFrame GetFarPlaneCFrame()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector3-origin-vector3-direction-getrayvector2-pixel" class="md-nav__link">
+    Vector3 origin, Vector3 direction GetRay(Vector2 pixel)
   </a>
   
 </li>
@@ -787,8 +857,8 @@
 <p><br></p>
 <h2 id="creating-a-raytracingcamera">Creating a RayTracingCamera</h2>
 <hr />
-<h3 id="raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-farplane-cframe-cframe"><a href="./">RayTracingCamera</a> RayTracingCamera.new(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> <arg>resolution</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>fieldOfView</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>farPlane</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> <arg>CFrame</arg> )</h3>
-<p>Creates a new RayTracingCamera. <arg>resolution</arg> is the camera viewport's size in pixels. <arg>fieldOfView</arg> is the camera's field of view in radians. <arg>farPlane</arg> is the distance to the far plane. <arg>CFrame</arg> is the camera's position and orientation.</p>
+<h3 id="raytracingcamera-raytracingcameranewvector2-resolution-float-fieldofview-float-nearplane-float-farplane-cframe-cframe-string-projection-perspective-float-orthographicsize-1"><a href="./">RayTracingCamera</a> RayTracingCamera.new(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> <arg>resolution</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>fieldOfView</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>nearPlane</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>farPlane</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> <arg>CFrame</arg>, <a href="https://developer.roblox.com/en-us/articles/String">string</a> <arg>projection [="perspective"]</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> <arg>orthographicSize? [=1]</arg>)</h3>
+<p>Creates a new RayTracingCamera. <arg>resolution</arg> is the camera viewport's size in pixels. <arg>fieldOfView</arg> is the camera's field of view in radians. <arg>nearPlane</arg> is the distance from the camera to the near plane. <arg>farPlane</arg> is the distance from the camera to the far plane. <arg>CFrame</arg> is the camera's position and orientation. <arg>projection</arg> is the projection type, either "perspective" or "orthographic". <arg>orthographicSize</arg> is the size of the orthographic projection in studs, which is applied only if <arg>projection</arg> is "orthographic".</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The RayTracingCamera acts as the origin point for the rays. This means that the camera's position and orientation must be set before the camera is used to render a scene.</p>
@@ -805,19 +875,47 @@
 <hr />
 <h3 id="float-fieldofview"><a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> FieldOfView</h3>
 <p>The camera's field of view in radians.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>FieldOfView is applied only if <strong><a href="#string-projection">Projection</a></strong> is "perspective".</p>
+</div>
 <hr />
 <h3 id="float-farplane"><a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> FarPlane</h3>
 <p>The distance to the far plane.</p>
 <hr />
-<h3 id="cframe-cframe"><a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFRame</a> CFrame</h3>
+<h3 id="cframe-cframe"><a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> CFrame</h3>
 <p>The camera's position and orientation.</p>
+<hr />
+<h3 id="string-projection"><a href="https://developer.roblox.com/en-us/articles/String">string</a> Projection</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/3D_projection">projection type</a>, either "perspective" or "orthographic".</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Orthographic projection ignores the field of view and only uses <strong><a href="#float-orthographicsize">OrthographicSize</a></strong>. Perspective projection uses the field of view to calculate the camera's view frustum.</p>
+</div>
+<hr />
+<h3 id="float-orthographicsize"><a href="https://developer.roblox.com/en-us/articles/Numbers">float</a> OrthographicSize</h3>
+<p>The size of the orthographic projection in studs, which is applied only if <arg>projection</arg> is "orthographic".</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OrthographicSize is applied only if <strong><a href="#string-projection">Projection</a></strong> is "orthographic".</p>
+</div>
 <p><br></p>
 <h2 id="methods">Methods</h2>
 <hr />
-<h3 id="vector3-getpixeldirectionvector2-pixel"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> GetPixelDirection(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> <arg>pixel</arg>)</h3>
-<p>Returns the direction of the ray that goes through the given pixel.</p>
-<h3 id="vector3-origin-vector3-direction-getinitialrayvector2-pixel">{<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>origin</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>direction</arg>} GetInitialRay(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> <arg>pixel</arg>)</h3>
-<p>Returns the origin and direction of the ray that goes through the given pixel.</p>
+<h3 id="vector3-getfarplanesize"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> GetFarPlaneSize()</h3>
+<p>Returns the size of the far plane in studs.</p>
+<hr />
+<h3 id="vector3-getnearplanesize"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> GetNearPlaneSize()</h3>
+<p>Returns the size of the near plane in studs.</p>
+<hr />
+<h3 id="cframe-getnearplanecframe"><a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> GetNearPlaneCFrame()</h3>
+<p>Returns the CFrame (position and orientation) of the camera's near plane.</p>
+<hr />
+<h3 id="cframe-getfarplanecframe"><a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> GetFarPlaneCFrame()</h3>
+<p>Returns the CFrame of the camera's far plane.</p>
+<hr />
+<h3 id="vector3-origin-vector3-direction-getrayvector2-pixel"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>origin</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>direction</arg> GetRay(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> <arg>pixel</arg>)</h3>
+<p>Returns the origin and direction of the ray that passes through the given pixel.</p>
 
               
             </article>

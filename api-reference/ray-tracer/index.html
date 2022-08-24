@@ -578,8 +578,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#void-createbufferstring-name-default-0" class="md-nav__link">
+    void CreateBuffer(string name, default [=0])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-removebufferstring-name" class="md-nav__link">
+    void RemoveBuffer(string name)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#2d-tablecolor3-render" class="md-nav__link">
-    2D table&lt;Color3&gt; Render()
+    2D table&lt;Color3&gt; Render(...)
   </a>
   
 </li>
@@ -784,8 +798,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#void-createbufferstring-name-default-0" class="md-nav__link">
+    void CreateBuffer(string name, default [=0])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-removebufferstring-name" class="md-nav__link">
+    void RemoveBuffer(string name)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#2d-tablecolor3-render" class="md-nav__link">
-    2D table&lt;Color3&gt; Render()
+    2D table&lt;Color3&gt; Render(...)
   </a>
   
 </li>
@@ -882,11 +910,21 @@
 <h3 id="void-clearbuffers"><a href="#void-raytracerclearbuffers">void</a> ClearBuffers()</h3>
 <p>Clears all buffers of the RayTracer.</p>
 <hr />
-<h3 id="2d-tablecolor3-render"><a href="https://developer.roblox.com/en-us/articles/Table">2D table</a>&lt;<a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a>&gt; Render()</h3>
-<p>Clears all buffers and renders the scene. Returns the color buffer after the render is complete.</p>
+<h3 id="void-createbufferstring-name-default-0"><a href="#void-raytracerrender">void</a> CreateBuffer(<a href="https://developer.roblox.com/en-us/articles/String">string</a> <arg>name</arg>, <arg>default [=0]</arg>)</h3>
+<p>Creates a new empty buffer with the given name. <arg>default</arg> is the default value that will be used for all pixels in the buffer and will be used to initialise <strong><a href="../traced-ray/#dict-out">TracedRay.Out</a></strong> when rendering. If <arg>default</arg> is not provided, 0 will be used. The default value can be any type.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Buffers created before calling <strong><a href="#2d-tablecolor3-render">RayTracer.Render</a></strong> can be written to by vertex shaders during the render process.</p>
+</div>
+<hr />
+<h3 id="void-removebufferstring-name"><a href="#void-raytracerrender">void</a> RemoveBuffer(<a href="https://developer.roblox.com/en-us/articles/String">string</a> <arg>name</arg>)</h3>
+<p>Removes the buffer with the given name.</p>
+<hr />
+<h3 id="2d-tablecolor3-render"><a href="https://developer.roblox.com/en-us/articles/Table">2D table</a>&lt;<a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a>&gt; Render(<arg>...</arg>)</h3>
+<p>Clears all buffers and renders the scene. Returns the color buffer after the render is complete. <arg>...</arg> is the arguments that will be passed to the shaders.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Post-processing shaders are not applied in this method. To apply post-processing shaders, use the <strong><a href="#postprocess">PostProcess</a></strong> method after the initial render is complete.</p>
+<p>Post-processing shaders are not applied in this method. To apply post-processing shaders, use the <strong><a href="#dict-postprocess">PostProcess</a></strong> method after the initial render is complete.</p>
 </div>
 <hr />
 <h3 id="dict-postprocess"><a href="https://developer.roblox.com/en-us/articles/Table#dictionaries">dict</a> PostProcess(<arg>...</arg>)</h3>
@@ -895,7 +933,7 @@
 <h3 id="color3-getpixelint-x-int-y"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> GetPixel(<a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>x</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>y</arg>)</h3>
 <p>Gets the color of the pixel at <arg>x</arg>, <arg>y</arg> from the color buffer.</p>
 <hr />
-<h3 id="void-setpixelint-x-int-y-color3-color"><a href="#void-raytracersetpixelinthttpsdeveloperrobloxcomen-usarticlesnumbers-argxarg-inthttpsdeveloperrobloxcomen-usarticlesnumbers-argyarg-color3httpscreaterobloxcomdocsreferenceenginedatatypescolor3-argcolorarg">void</a> SetPixel(<a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>x</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>y</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> <arg>color</arg>)</h3>
+<h3 id="void-setpixelint-x-int-y-color3-color"><a href="#color3-getpixelint-x-int-y">void</a> SetPixel(<a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>x</arg>, <a href="https://developer.roblox.com/en-us/articles/Numbers">int</a> <arg>y</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> <arg>color</arg>)</h3>
 <p>Sets the color of the pixel at <arg>x</arg>, <arg>y</arg> in the color buffer.</p>
 <hr />
 <h3 id="color3-visualizenormalvector3-normal"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> VisualizeNormal(<a href="https://developer.roblox.com/en-us/articles/Numbers">Vector3</a> <arg>normal</arg>)</h3>

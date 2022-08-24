@@ -578,8 +578,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#color3-processtracedray-tracedray-raycastresult-raycastresult" class="md-nav__link">
-    Color3 Process(TracedRay tracedRay, RaycastResult raycastResult, ...)
+  <a href="#dict-processtracedray-tracedray-raycastresult-raycastresult" class="md-nav__link">
+    dict Process(TracedRay tracedRay, RaycastResult raycastResult, ...)
   </a>
   
 </li>
@@ -615,6 +615,27 @@
           <li class="md-nav__item">
   <a href="#vector3-float-complexintersectvector3-origin-vector3-direction-instance-object" class="md-nav__link">
     Vector3, float ComplexIntersect(Vector3 origin, Vector3 direction, Instance object)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector3-color3tovector3color3-color" class="md-nav__link">
+    Vector3 Color3ToVector3(Color3 color)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color3-vector3tocolor3vector3-vector-boolean-clamp-false" class="md-nav__link">
+    Color3 Vector3ToColor3(Vector3 vector, boolean clamp? [=false])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color3-numbertocolor3number-number" class="md-nav__link">
+    Color3 NumberToColor3(number number)
   </a>
   
 </li>
@@ -735,8 +756,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#color3-processtracedray-tracedray-raycastresult-raycastresult" class="md-nav__link">
-    Color3 Process(TracedRay tracedRay, RaycastResult raycastResult, ...)
+  <a href="#dict-processtracedray-tracedray-raycastresult-raycastresult" class="md-nav__link">
+    dict Process(TracedRay tracedRay, RaycastResult raycastResult, ...)
   </a>
   
 </li>
@@ -772,6 +793,27 @@
           <li class="md-nav__item">
   <a href="#vector3-float-complexintersectvector3-origin-vector3-direction-instance-object" class="md-nav__link">
     Vector3, float ComplexIntersect(Vector3 origin, Vector3 direction, Instance object)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector3-color3tovector3color3-color" class="md-nav__link">
+    Vector3 Color3ToVector3(Color3 color)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color3-vector3tocolor3vector3-vector-boolean-clamp-false" class="md-nav__link">
+    Color3 Vector3ToColor3(Vector3 vector, boolean clamp? [=false])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color3-numbertocolor3number-number" class="md-nav__link">
+    Color3 NumberToColor3(number number)
   </a>
   
 </li>
@@ -820,7 +862,8 @@
 <p>The function to call when the shader is applied.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The shader function is expected to return a Color3.</p>
+<p>The shader function is expected to return an <strong><a href="../traced-ray/#dict-out">Out</a></strong> dictionary. If the shader function returns nothing, the ray will keep its current output.</p>
+<p>For backwards compatibility, the shader can also return a Color3. Note that <strong><a href="../traced-ray/#color3-color">TracedRay.Color</a></strong> is deprecated and will be removed in a future version.</p>
 </div>
 <hr />
 <h3 id="table-attributes"><a href="https://developer.roblox.com/en-us/articles/Table">table</a> Attributes</h3>
@@ -828,14 +871,18 @@
 <p><br></p>
 <h2 id="methods">Methods</h2>
 <hr />
-<h3 id="color3-processtracedray-tracedray-raycastresult-raycastresult"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> Process(<a href="../traced-ray/">TracedRay</a> <arg>tracedRay</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastResult">RaycastResult</a> <arg>raycastResult</arg>, <arg>...</arg>)</h3>
-<p>Process the shader on the ray. <arg>tracedRay</arg> is the ray that is being processed. <arg>raycastResult</arg> is the result of the raycast. <arg>...</arg> is any additional arguments passed to the shader.</p>
+<h3 id="dict-processtracedray-tracedray-raycastresult-raycastresult"><a href="https://developer.roblox.com/en-us/articles/Table#dictionaries">dict</a> Process(<a href="../traced-ray/">TracedRay</a> <arg>tracedRay</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastResult">RaycastResult</a> <arg>raycastResult</arg>, <arg>...</arg>)</h3>
+<p>Process the shader on the ray. <arg>tracedRay</arg> is the ray that is being processed. <arg>raycastResult</arg> is the result of the raycast. <arg>...</arg> is any additional arguments passed to the shader. The dictionary returned by the shader is expected to match the format of <strong><a href="../traced-ray/">Ray.Out</a></strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong><a href="../traced-ray/">Ray.Out</a></strong> should never contain values for non-existent buffers.</p>
+</div>
 <hr />
 <h3 id="tracedray-continuetracedray-tracedray-raycastresult-raycastresult"><a href="../traced-ray/">TracedRay</a> Continue(<a href="../traced-ray/">TracedRay</a> <arg>tracedRay</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastResult">RaycastResult</a> <arg>raycastResult</arg>)</h3>
 <p>Continues the ray after it has been processed by the shader. <arg>tracedRay</arg> is the ray that is being processed. <arg>raycastResult</arg> is the result of the raycast.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This method will continue the ray in the same direction as the ray's previous direction. For more fine control over how the ray is continued, create a new <a href="../traced-ray/#constructor">TracedRay</a> manually in a shader.</p>
+<p>This method will continue the ray in the same direction as the ray's previous direction. For more fine control over how the ray is continued, create a new <strong><a href="../traced-ray/">TracedRay</a></strong> manually in a shader.</p>
 </div>
 <hr />
 <h3 id="tracedray-reflecttracedray-tracedray-raycastresult-raycastresult-vector3-normal"><a href="../traced-ray/">TracedRay</a> Reflect(<a href="../traced-ray/">TracedRay</a> <arg>tracedRay</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastResult">RaycastResult</a> <arg>raycastResult</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>normal</arg>)</h3>
@@ -848,7 +895,20 @@
 <p>Calculates the intersection end point and length of a ray through an object based on its outermost geometry. <arg>origin</arg> is the origin of the ray. <arg>direction</arg> is the direction of the ray.</p>
 <hr />
 <h3 id="vector3-float-complexintersectvector3-origin-vector3-direction-instance-object"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/float">float</a> ComplexIntersect(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>origin</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>direction</arg>, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Instance">Instance</a> <arg>object</arg>)</h3>
-<p>Calculates the first intersection end point and length of a ray through an object based on its true geometry. <arg>origin</arg> is the origin of the ray. <arg>direction</arg> is the direction of the ray. This method is more accurate than <a href="#SimpleIntersect">SimpleIntersect</a> but is slower.</p>
+<p>Calculates the first intersection end point and length of a ray through an object based on its true geometry. <arg>origin</arg> is the origin of the ray. <arg>direction</arg> is the direction of the ray. This method is more accurate than <strong><a href="#vector3-float-simpleintersectvector3-origin-vector3-direction-instance-object">SimpleIntersect</a></strong> but is slower.</p>
+<hr />
+<h3 id="vector3-color3tovector3color3-color"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> Color3ToVector3(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> <arg>color</arg>)</h3>
+<p>Converts a Color3 to a Vector3 to make math operations easier.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Shaders are expected to return a Color3. If you convert a Color3 to a Vector3, remember to convert it back to a Color3 when returning a value.</p>
+</div>
+<hr />
+<h3 id="color3-vector3tocolor3vector3-vector-boolean-clamp-false"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> Vector3ToColor3(<a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> <arg>vector</arg>, <a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> <arg>clamp? [=false]</arg>)</h3>
+<p>Converts a Vector3 to a Color3. If <arg>clamp</arg> is true, the vector will be clamped to the range [0, 1].</p>
+<hr />
+<h3 id="color3-numbertocolor3number-number"><a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> NumberToColor3(<a href="https://create.roblox.com/docs/reference/engine/datatypes/number">number</a> <arg>number</arg>)</h3>
+<p>Converts a number to a greyscale Color3.</p>
 
               
             </article>

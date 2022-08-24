@@ -573,6 +573,7 @@
 <span class="c1">-- We&#39;ll use a resolution of 100x100 to avoid having to wait too long for the render to complete.</span>
 <span class="kd">local</span> <span class="n">resolution</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">fieldOfView</span> <span class="o">=</span> <span class="nb">math.rad</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>    <span class="c1">-- Field of view is measured in radians.</span>
+<span class="kd">local</span> <span class="n">nearPlane</span> <span class="o">=</span> <span class="mf">0.1</span>               <span class="c1">-- The near plane determines how close the camera can be to an object before it is clipped.</span>
 <span class="kd">local</span> <span class="n">farPlane</span> <span class="o">=</span> <span class="mi">100</span>                <span class="c1">-- How far the camera can see.</span>
 
 <span class="c1">-- We&#39;ll place the camera 5 studs above the world origin.</span>
@@ -580,7 +581,7 @@
 <span class="kd">local</span> <span class="n">CFrame</span> <span class="o">=</span> <span class="n">CFrame</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="c1">-- Create the camera.</span>
-<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">nearPlane</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
 </code></pre></div>
 <p><br></p>
 <p>Now we have the camera. However, the camera is not the one doing the rendering. It only tells the RayTracer where to look and which direction each pixel should be cast.</p>
@@ -617,12 +618,14 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">RayTracer</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracer</span><span class="p">)</span>
 
 <span class="c1">-- We&#39;ll use a resolution of 100x100 to avoid having to wait too long for the render to complete.</span>
 <span class="kd">local</span> <span class="n">resolution</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">fieldOfView</span> <span class="o">=</span> <span class="nb">math.rad</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>    <span class="c1">-- Field of view is measured in radians.</span>
+<span class="kd">local</span> <span class="n">nearPlane</span> <span class="o">=</span> <span class="mf">0.1</span>               <span class="c1">-- The near plane determines how close the camera can be to an object before it is clipped.</span>
 <span class="kd">local</span> <span class="n">farPlane</span> <span class="o">=</span> <span class="mi">100</span>                <span class="c1">-- How far the camera can see.</span>
 
 <span class="c1">-- We&#39;ll place the camera 5 studs above the world origin.</span>
@@ -630,7 +633,7 @@
 <span class="kd">local</span> <span class="n">CFrame</span> <span class="o">=</span> <span class="n">CFrame</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="c1">-- Create the camera.</span>
-<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
+<span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">nearPlane</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
 
 <span class="c1">-- We won&#39;t be defining shaders just yet, so we don&#39;t need to pass any parameters except the camera.</span>
 <span class="kd">local</span> <span class="n">myRayTracer</span> <span class="o">=</span> <span class="n">RayTracer</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">myCamera</span><span class="p">)</span>
@@ -707,12 +710,14 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">RayTracingCamera</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracingCamera</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">RayTracer</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">package</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">RayTracer</span><span class="p">)</span>
 
 <span class="c1">-- We&#39;ll use a resolution of 100x100 to avoid having to wait too long for the render to complete.</span>
 <span class="kd">local</span> <span class="n">resolution</span> <span class="o">=</span> <span class="n">Vector2</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kd">local</span> <span class="n">fieldOfView</span> <span class="o">=</span> <span class="nb">math.rad</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>    <span class="c1">-- Field of view is measured in radians.</span>
+<span class="kd">local</span> <span class="n">nearPlane</span> <span class="o">=</span> <span class="mf">0.1</span>               <span class="c1">-- The near plane determines how close the camera can be to an object before it is clipped.</span>
 <span class="kd">local</span> <span class="n">farPlane</span> <span class="o">=</span> <span class="mi">100</span>                <span class="c1">-- How far the camera can see.</span>
 
 <span class="c1">-- We&#39;ll place the camera 5 studs above the world origin.</span>
@@ -720,7 +725,7 @@
 <span class="kd">local</span> <span class="n">CFrame</span> <span class="o">=</span> <span class="n">CFrame</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="c1">-- Create the camera.</span>
-<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">myCamera</span> <span class="o">=</span> <span class="n">RayTracingCamera</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="p">,</span> <span class="n">nearPlane</span><span class="p">,</span> <span class="n">farPlane</span><span class="p">,</span> <span class="n">CFrame</span><span class="p">)</span>
 
 <span class="c1">-- We won&#39;t be defining shaders just yet, so we don&#39;t need to pass any parameters except the camera.</span>
 <span class="kd">local</span> <span class="n">myRayTracer</span> <span class="o">=</span> <span class="n">RayTracer</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">myCamera</span><span class="p">)</span>

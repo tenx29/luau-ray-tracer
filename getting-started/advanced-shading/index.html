@@ -419,6 +419,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#custom-buffer-output" class="md-nav__link">
+    Custom buffer output
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#disclaimers" class="md-nav__link">
     Disclaimers
   </a>
@@ -613,6 +620,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#custom-buffer-output" class="md-nav__link">
+    Custom buffer output
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#disclaimers" class="md-nav__link">
     Disclaimers
   </a>
@@ -665,7 +679,8 @@
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- ModuleScript</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- ModuleScript</span>
 
 <span class="kd">local</span> <span class="n">Shader</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">script</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">Shader</span><span class="p">)</span>
 
@@ -683,7 +698,8 @@
         <span class="c1">-- Create a reflection ray and return the color of the reflected ray.</span>
         <span class="c1">-- The Reflect method will copy all shaders from the original ray to the new ray</span>
         <span class="c1">-- and handles bounce limiting.</span>
-        <span class="kr">return</span> <span class="n">Shader</span><span class="p">:</span><span class="n">Reflect</span><span class="p">(</span><span class="n">Ray</span><span class="p">,</span> <span class="n">Hit</span><span class="p">,</span> <span class="n">Normal</span><span class="p">).</span><span class="n">Color</span>
+        <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span><span class="p">.</span><span class="n">Color</span> <span class="o">=</span> <span class="n">Shader</span><span class="p">:</span><span class="n">Reflect</span><span class="p">(</span><span class="n">Ray</span><span class="p">,</span> <span class="n">Hit</span><span class="p">,</span> <span class="n">Normal</span><span class="p">).</span><span class="n">Color</span>
+        <span class="kr">return</span> <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
 
@@ -718,7 +734,8 @@
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- ModuleScript</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- ModuleScript</span>
 
 <span class="kd">local</span> <span class="n">Shader</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">script</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">Shader</span><span class="p">)</span>
 
@@ -736,7 +753,8 @@
         <span class="c1">-- Create a refraction ray and return the color of the refracted ray.</span>
         <span class="c1">-- The Refract method will copy all shaders from the original ray to the new ray</span>
         <span class="c1">-- and handles bounce limiting.</span>
-        <span class="kr">return</span> <span class="n">Shader</span><span class="p">:</span><span class="n">Refract</span><span class="p">(</span><span class="n">Ray</span><span class="p">,</span> <span class="n">Hit</span><span class="p">,</span> <span class="n">Normal</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">).</span><span class="n">Color</span>
+        <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span><span class="p">.</span><span class="n">Color</span> <span class="o">=</span> <span class="n">Shader</span><span class="p">:</span><span class="n">Refract</span><span class="p">(</span><span class="n">Ray</span><span class="p">,</span> <span class="n">Hit</span><span class="p">,</span> <span class="n">Normal</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">).</span><span class="n">Color</span>
+        <span class="kr">return</span> <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
 
@@ -745,7 +763,61 @@
 </td></tr></table>
 </details>
 <p><br></p>
-<p>Here's an example of what you can do with the Shader and PostProcessingShader classes.</p>
+<h2 id="custom-buffer-output">Custom buffer output</h2>
+<p>As a new feature in version 2, each TracedRay has an <code>Out</code> property that can be used to store custom data. This is useful if you want to create new buffers that are not part of the standard output.</p>
+<p>To write custom data to the output, we must first create a new buffer before calling the Render method. This can be done by calling the <code>CreateBuffer</code> method on the RayTracer object.</p>
+<p><br></p>
+<p>Let's create a new buffer called <code>Neon</code> that uses black as a default value for each pixel.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myRayTracer</span><span class="p">:</span><span class="n">CreateBuffer</span><span class="p">(</span><span class="s1">&#39;Neon&#39;</span><span class="p">,</span> <span class="n">Color3</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div>
+<p><br></p>
+<p>Now let's write a create that writes the color of an object to the <code>Neon</code> buffer if the object's material is <code>Neon</code>.</p>
+<details class="info">
+<summary>Neon shader example</summary>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- ModuleScript</span>
+
+<span class="kd">local</span> <span class="n">Shader</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">script</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">Parent</span><span class="p">.</span><span class="n">classes</span><span class="p">.</span><span class="n">Shader</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">NeonShader</span> <span class="o">=</span> <span class="n">Shader</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+
+<span class="n">NeonShader</span><span class="p">.</span><span class="n">Function</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">Ray</span><span class="p">,</span> <span class="n">Hit</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="c1">-- If the ray didn&#39;t hit anything, skip this shader.</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">Hit</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+    <span class="c1">-- Only apply the shader to objects whose material is Neon.</span>
+    <span class="kr">if</span> <span class="n">Hit</span><span class="p">.</span><span class="n">Material</span> <span class="o">==</span> <span class="n">Enum</span><span class="p">.</span><span class="n">Material</span><span class="p">.</span><span class="n">Neon</span> <span class="kr">then</span>
+        <span class="c1">-- Write the color of the object to the Neon buffer.</span>
+        <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span><span class="p">.</span><span class="n">Neon</span> <span class="o">=</span> <span class="n">Hit</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">Color</span>
+        <span class="kr">return</span> <span class="n">Ray</span><span class="p">.</span><span class="n">Out</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">return</span> <span class="n">NeonShader</span>
+</code></pre></div>
+</td></tr></table>
+</details>
+<p><br></p>
+<p>Now let's apply this shader to the scene and see what the Neon buffer looks like.</p>
+<p><img alt="Image of the Neon buffer using a scene with 2 neon spheres of different colors." src="../../resources/neon-buffer.png" /></p>
+<p>Custom buffers such as this can be useful for certain types of post processing effects.</p>
+<p><br><br></p>
+<p>Here's another example of what you can do with the Shader and PostProcessingShader classes.</p>
 <p><img alt="Example scene using glass and mirror shaders" src="../../resources/advanced-shading-example.png" /></p>
 <p><br></p>
 <h2 id="disclaimers">Disclaimers</h2>
