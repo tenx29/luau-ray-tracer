@@ -46,9 +46,26 @@ function RayTracer:VisualizeNormal(normal: Vector3): Color3
     return Color3.new((normal.X+1)/2, (normal.Y+1)/2, (normal.Z+1)/2)
 end
 
+-- Helper function to generate default values for buffers.
+-- This ensures that the Out property of each TracedRay has values for all buffers.
+function RayTracer:DefaultBufferValues()
+    local defaults = {}
+
+    for buffer, _ in pairs(self.Buffers) do
+        defaults[buffer] = 0
+    end
+
+    defaults.Color = Color3.new(1, 0, 1);
+    defaults.Depth = 1
+    defaults.Normal = Vector3.new(0, 0, 0)
+
+    return defaults
+end
+
 -- Render the entire frame
 function RayTracer:Render(...): {{Color3}}
     self:ClearBuffers()
+    
     for x = 1, self.Camera.Resolution.X do
         for _, buffer in self.Buffers do
             buffer[x] = {}
@@ -57,7 +74,7 @@ function RayTracer:Render(...): {{Color3}}
             local Pixel = Vector2.new(x, y)
             local Origin, Direction = self.Camera:GetRay(Pixel)
 
-            local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders)
+            local Ray = TracedRay.new(Pixel, Origin, Direction * (self.Camera.FarPlane - self.Camera.NearPlane), self.MaxBounces, nil, self.Shaders, self:DefaultBufferValues())
             local result = Ray:Trace(...).Out
 
             for buffer, _ in pairs(self.Buffers) do

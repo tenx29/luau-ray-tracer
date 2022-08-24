@@ -12,7 +12,7 @@ export type TracedRay = {
 local TracedRay = {}
 TracedRay.__index = TracedRay
 
-function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxBounces: number, RaycastParams: RaycastParams, Shaders: {})
+function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxBounces: number, RaycastParams: RaycastParams, Shaders: {}, Out: {}?)
     local self = setmetatable({}, TracedRay)
     self.Pixel = Pixel
     self.Color = Color3.fromRGB(255, 0, 255)
@@ -26,7 +26,8 @@ function TracedRay.new(Pixel: Vector2, Origin: Vector3, Direction: Vector3, MaxB
     self.MaxBounces = MaxBounces
     self.RaycastParams = RaycastParams
     self.Shaders = Shaders
-    self.Out = {
+
+    self.Out = Out or {
         Color = Color3.new(1, 0, 1);
         Depth = 1;
         Normal = Vector3.new(0, 0, 0);
