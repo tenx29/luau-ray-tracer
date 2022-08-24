@@ -70,12 +70,6 @@ function TracedRay:Trace(...)
             applyShaderResult(self, Shader:Process(self, result, ...))
         end
     end
-    if self.Color == Color3.fromRGB(255, 0, 255) then
-        -- Fallback color
-        for _, Shader in self.Shaders do
-            applyShaderResult(self, Shader:Process(self, result, ...))
-        end
-    end
 
     return self
 end
